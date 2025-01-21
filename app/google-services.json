@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324574164690",
+    "project_id": "sonichero-5f976",
+    "storage_bucket": "sonichero-5f976.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324574164690:android:db5dc063ebbaeda7d19f0b",
+        "android_client_info": {
+          "package_name": "com.momotoff.sonichero"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-C74RT1uTRyeXmy8kfKUyNRhT5GLeUdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

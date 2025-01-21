@@ -1,0 +1,46 @@
+<resources>
+    //Game name
+    <string name="app_name">SonicHero</string>
+
+    //Menu
+    <string name="txtMainMenuNameGame">Sonic Hero</string>
+    <string name="txtMainMenuStartGame">Начать</string>
+    <string name="txtMainMenuMenuSettings">Настройки</string>
+    <string name="txtMainMenuResult">Результат</string>
+    <string name="txtMainMenuExitGame">Выход из игры</string>
+
+    //Ready
+    <string name="txtGameSceneReady">Вы готовы?</string>
+
+    //Game Scene
+        //HUD
+        <string name="txtHudPassedDistance">Пройдено</string>
+        <string name="txtHudCurrentSpeedPlayer">Скорость</string>
+        <string name="txtHudCurrentShieldsPlayer">Защита</string>
+        <string name="txtLevel">Сложность</string>
+
+    //Game Over scene
+    <string name="txtGameOver">Конец игры</string>
+    <string name="txtRestart">Повторить</string>
+    <string name="txtExitMenu">Выход в меню</string>
+
+    //Results
+    <string name="txtLocalRating">Личный рейтинг</string>
+    <string name="txtWorldRating">Мировой рейтинг</string>
+    <string name="txtBack">Назад</string>
+
+    //Registration window
+    <string name="txtUserName">Ваш Email</string>
+    <string name="txtPassword">Пароль</string>
+    <string name="txtSingIn">Войти</string>
+    <string name="txtSingUp">Зарегистрироваться</string>
+    <string name="txtFillToast">Заполните поля</string>
+    <string name="txtInvalidInputToast">Некорректный ввод</string>
+    <string name="txtUserCollision">Такой пользователь уже есть</string>
+    <string name="txtYouAreLoggedToast">Вы вошли через почту </string>
+    <string name="txtDeleteAccount">Удалить аккаунт</string>
+    <string name="txtSignOut">Выйти из аккаунта</string>
+    <string name="txtAccountDeleteSuccess">Аккаунт удалён</string>
+    <string name="txtAccountDeleteFailed">Не удалось удалить аккаунт</string>
+    <string name="txtSignOutSuccess">Вы вышли из аккаунта</string>
+</resources>
