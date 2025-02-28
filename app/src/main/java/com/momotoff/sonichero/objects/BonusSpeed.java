@@ -33,7 +33,8 @@ public class BonusSpeed extends ObjectFW implements IDrawable
     @Override
     public void update()
     {
-        position.x -= speed;
+        if (Player.getRunning())
+            position.x -= speed;
 
         if (position.x + Resource.bonusSpeedSprite.get(0).getWidth() < 0)
         {
@@ -46,10 +47,7 @@ public class BonusSpeed extends ObjectFW implements IDrawable
     }
 
     @Override
-    public void drawing(GraphicsFW graphicsFW)
-    {
-        bonusSpeedAnim.drawingAnimation(graphicsFW, getPosition());
-    }
+    public void drawing(GraphicsFW graphicsFW) { bonusSpeedAnim.drawingAnimation(graphicsFW, getPosition()); }
 
     public Rect getHitBox()
     {
