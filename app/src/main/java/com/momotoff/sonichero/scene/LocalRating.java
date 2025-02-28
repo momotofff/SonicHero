@@ -57,7 +57,7 @@ public class LocalRating extends SceneFW
     @Override
     public void drawing()
     {
-        graphicsFW.drawTexture(Resource.menuImage, new Point(0, 0));
+        graphicsFW.drawTexture(Resource.background, new Point(0, 0));
         graphicsFW.drawText(localRating);
         graphicsFW.drawText(back);
         graphicsFW.drawText(worldRating);

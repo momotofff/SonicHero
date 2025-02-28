@@ -36,17 +36,15 @@ public class GraphicsFW
         canvas.drawRGB(colorRGB, colorRGB, colorRGB);
     }
 
-    public void drawPixel(Point position, int color)
-    {
-        paint.setColor(color);
-        canvas.drawPoint(position.x, position.y, paint);
-
-    }
-
     public void drawLine(int startX, int startY, int stopX, int stopY, int color)
     {
         paint.setColor(color);
         canvas.drawLine(startX, startY, stopX, stopY, paint);
+    }
+    public void drawHitBox(Rect hitBox)
+    {
+        paint.setColor(Color.RED);
+        canvas.drawRect(hitBox , paint);
     }
 
     public int measureText(StaticTextFW text)

@@ -1,5 +1,6 @@
 package com.momotoff.sonichero.scene;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -11,8 +12,6 @@ import com.momotoff.my_framework.StaticTextFW;
 import com.momotoff.my_framework.TimerDelay;
 import com.momotoff.sonichero.R;
 import com.momotoff.sonichero.classes.Manager;
-import com.momotoff.sonichero.objects.Asteroid;
-import com.momotoff.sonichero.objects.Star;
 import com.momotoff.sonichero.utilities.Save;
 
 public class GameScene extends SceneFW
@@ -23,6 +22,8 @@ public class GameScene extends SceneFW
     private final TimerDelay powerUpDelay = new TimerDelay();
 
     private final StaticTextFW Ready = new StaticTextFW(coreFW.getString(R.string.txtGameSceneReady), new Point(300,200), 100);
+    private Bitmap buttonUp;
+    private Bitmap buttonRight;
 
     enum GameState
     {
@@ -62,23 +63,8 @@ public class GameScene extends SceneFW
             coreFW.getSoundFW().start(R.raw.level_up);
             ++manager.player.level;
             ++manager.player.shields;
-            ++manager.player.speed;
-            ++manager.player.dexterity;
-
 
             powerUpDelay.start();
-
-            Asteroid asteroid = new Asteroid(manager.maxScreen, manager.getHUD_HEIGHT());
-            asteroid.restartFromInitialPosition();
-            manager.getzOrder().add(asteroid);
-            manager.asteroids.add(asteroid);
-
-            for (Star star : manager.background.stars)
-                ++star.speed;
-            for (Star star : manager.background.bigStars1)
-                ++star.speed;
-            for (Star star : manager.background.bigStars2)
-                ++star.speed;
         }
     }
 
@@ -122,6 +108,7 @@ public class GameScene extends SceneFW
     {
         graphicsFW.clearScene(Color.BLACK);
         manager.drawing(graphicsFW);
+
     }
 
     private void drawingStateReady()

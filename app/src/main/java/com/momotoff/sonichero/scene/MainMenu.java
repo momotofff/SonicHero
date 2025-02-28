@@ -108,7 +108,7 @@ public class MainMenu extends SceneFW
     @Override
     public void drawing()
     {
-        graphicsFW.drawTexture(Resource.menuImage, new Point(0, 0));
+        graphicsFW.drawTexture(Resource.background, new Point(0, 0));
         graphicsFW.drawText(Title);
         graphicsFW.drawText(MenuStart);
         graphicsFW.drawText(MenuSettings);

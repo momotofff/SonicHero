@@ -8,15 +8,15 @@ import com.momotoff.my_framework.GraphicsFW;
 import com.momotoff.my_framework.IDrawable;
 import com.momotoff.my_framework.TimerDelay;
 import com.momotoff.sonichero.generation.Background;
-import com.momotoff.sonichero.objects.Asteroid;
+
 import com.momotoff.sonichero.objects.BonusShield;
 import com.momotoff.sonichero.objects.BonusSpeed;
+import com.momotoff.sonichero.objects.Earth;
 import com.momotoff.sonichero.objects.Hud;
 import com.momotoff.sonichero.objects.Player;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.List;;
 
 public class Manager
 {
@@ -25,7 +25,6 @@ public class Manager
     public Background background;
     public Player player;
     private final Hud hud;
-    public ArrayList<Asteroid> asteroids = new ArrayList<>();
     private BonusSpeed bonusSpeed;
     private BonusShield bonusShield;
     private List<IDrawable> zOrder = new ArrayList<>();
@@ -46,9 +45,6 @@ public class Manager
         bonusSpeed = new BonusSpeed(displaySize, HUD_HEIGHT);
         bonusShield = new BonusShield(displaySize, HUD_HEIGHT);
 
-        for (int i = 0; i < ASTEROIDS_COUNT; ++i)
-            asteroids.add(new Asteroid(displaySize, HUD_HEIGHT));
-
         zOrder.add(background);
         zOrder.add(bonusSpeed);
         zOrder.add(bonusShield);
@@ -63,9 +59,6 @@ public class Manager
             entry.update();
         }
 
-        for(IDrawable ast: asteroids)
-            ast.update();
-
         checkHit();
 
         if (gameOverDelay.isElapsed(1))
@@ -74,18 +67,6 @@ public class Manager
 
     private void checkHit()
     {
-        Optional<Asteroid> optional = asteroids.stream()
-                .filter(asteroid -> CollisionDetector.detect(player, asteroid))
-                .findFirst();
-
-        optional.ifPresent(asteroid -> {
-            player.hitObject();
-            asteroid.restartFromInitialPosition();
-
-            if (player.isDead())
-                gameOverDelay.start();
-        });
-
         if (CollisionDetector.detect(player, bonusShield))
         {
             bonusShield.restartFromInitialPosition();
@@ -98,17 +79,21 @@ public class Manager
             bonusSpeed.restartFromInitialPosition();
 
             player.speed += 2;
-            --player.dexterity;
         }
+
+        for (Earth earth: background.earths)
+        {
+            CollisionDetector.detectObject(player, earth);
+            if (player.getSide() == CollisionDetector.Side.BOTTOM)
+                break;
+        }
+
     }
 
     public void drawing(GraphicsFW graphicsFW)
     {
         for(IDrawable entry : zOrder)
             entry.drawing(graphicsFW);
-
-        for (IDrawable ast: asteroids)
-            ast.drawing(graphicsFW);
     }
 
     public int getHUD_HEIGHT() {

@@ -34,7 +34,8 @@ public class BonusShield extends ObjectFW implements IDrawable
     @Override
     public void update()
     {
-        position.x -= speed;
+        if (Player.getRunning())
+            position.x -= speed;
 
         if (position.x + Resource.bonusShieldSprite.get(0).getWidth() < 0)
         {
