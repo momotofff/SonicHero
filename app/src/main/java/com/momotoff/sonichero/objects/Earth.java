@@ -13,7 +13,7 @@ public class Earth extends ObjectFW implements IDrawable
     {
         this.screen = new Rect(0, height, sceneSize.x, sceneSize.y);
         this.position.y = this.screen.bottom - Resource.earth.getHeight();
-        radius = Resource.bonusSpeedSprite.get(0).getHeight() / 2;
+        radius = Resource.shieldSprite.get(0).getHeight() / 2;
     }
 
     @Override

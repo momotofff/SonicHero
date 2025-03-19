@@ -13,8 +13,7 @@ import java.util.ArrayList;
 
 public class Loading
 {
-    private final Point SPRITE_SIZE = new Point(128, 64);
-    private final Point SPRITE_SIZE_PLAYER = new Point(62, 74);
+    private final Point SPRITE_SIZE = new Point(132, 132);
 
     public Loading(CoreFW coreFW, GraphicsFW graphicsFW)
     {
@@ -25,16 +24,22 @@ public class Loading
 
     private void loadSprite(GraphicsFW graphicsFW)
     {
-        readerSpritePlayer(graphicsFW, Resource.playerSprite);
-        readerSprite(graphicsFW, 1, Resource.playerSpriteUp);
+        readerSprite(graphicsFW, 0, Resource.playerSprite);
+        readerSprite(graphicsFW, 1, Resource.playerSpriteRun);
+        readerSprite(graphicsFW, 2, Resource.playerSpriteJump);
+        readerSprite(graphicsFW, 3, Resource.playerSpriteShield);
+        readerSprite(graphicsFW, 5, Resource.playerSpriteRunShield);
+        readerSprite(graphicsFW, 4, Resource.playerSpriteJumpShield);
+        readerSprite(graphicsFW, 6, Resource.shieldSprite);
+
         //readerSprite(graphicsFW, 2, Resource.bigStarSprite);
         //readerSprite(graphicsFW, 3, Resource.asteroidSprite);
-        readerSprite(graphicsFW, 4, Resource.playerSpriteDestruction);
-        readerSprite(graphicsFW, 5, Resource.playerSpriteDamage);
-        readerSprite(graphicsFW, 6, Resource.playerSpriteUpDamage);
-        readerSprite(graphicsFW, 7, Resource.playerSpriteShield);
-        readerSprite(graphicsFW, 8, Resource.bonusSpeedSprite);
-        readerSprite(graphicsFW, 9, Resource.bonusShieldSprite);
+        //readerSprite(graphicsFW, 4, Resource.playerSpriteDestruction);
+        //readerSprite(graphicsFW, 5, Resource.playerSpriteDamage);
+        //readerSprite(graphicsFW, 6, Resource.playerSpriteUpDamage);
+
+        //readerSprite(graphicsFW, 8, Resource.bonusSpeedSprite);
+       // readerSprite(graphicsFW, 9, Resource.bonusShieldSprite);
 
     }
 
@@ -58,22 +63,9 @@ public class Loading
         }
     }
 
-    private void readerSpritePlayer(GraphicsFW graphicsFW, ArrayList<Bitmap> sprite)
-    {
-        Rect rect = new Rect(0,0, SPRITE_SIZE_PLAYER.x, SPRITE_SIZE_PLAYER.y);
-        final int FRAMES_COUNT = 8;
-
-        for (int i = 0; i < FRAMES_COUNT; ++i)
-        {
-            sprite.add(graphicsFW.newSprite(Resource.sonicTexture, rect));
-            rect.left += SPRITE_SIZE_PLAYER.x;
-        }
-    }
-
     private void loadTexture(GraphicsFW graphicsFW)
     {
         Resource.textureAtlas = graphicsFW.newTexture("textureAtlas.png");
-        Resource.sonicTexture = graphicsFW.newTexture("sonicTexture.png");
         Resource.background = graphicsFW.newTexture("Background.png");
         Resource.earth = graphicsFW.newTexture("earth.jpg");
         Resource.cloud = graphicsFW.newTexture("cloud.png");

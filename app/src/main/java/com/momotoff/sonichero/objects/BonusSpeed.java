@@ -16,18 +16,18 @@ public class BonusSpeed extends ObjectFW implements IDrawable
     public BonusSpeed(Point sceneSize, int height)
     {
         this.screen = new Rect(0, height, sceneSize.x, sceneSize.y);
-        this.bonusSpeedAnim = new AnimationFW(Resource.bonusSpeedSprite);
+        this.bonusSpeedAnim = new AnimationFW(Resource.shieldSprite);
 
-        Point position = new Point((int) (screen.right * Math.random()), (int) (Math.random() * screen.bottom) + Resource.bonusSpeedSprite.get(0).getHeight() + height);
-        updatePosition(position, Resource.bonusSpeedSprite.get(0));
+        Point position = new Point((int) (screen.right * Math.random()), (int) (Math.random() * screen.bottom) + Resource.shieldSprite.get(0).getHeight() + height);
+        updatePosition(position, Resource.shieldSprite.get(0));
 
-        radius = Resource.bonusSpeedSprite.get(0).getHeight() / 2;
+        radius = Resource.shieldSprite.get(0).getHeight() / 2;
     }
 
     public void restartFromInitialPosition()
     {
         position.x = screen.right;
-        position.y = (int) (screen.bottom * Math.random()) + Resource.bonusSpeedSprite.get(0).getHeight() * 2;
+        position.y = (int) (screen.bottom * Math.random()) + Resource.shieldSprite.get(0).getHeight() * 2;
     }
 
     @Override
@@ -36,13 +36,13 @@ public class BonusSpeed extends ObjectFW implements IDrawable
         if (Player.getRunning())
             position.x -= speed;
 
-        if (position.x + Resource.bonusSpeedSprite.get(0).getWidth() < 0)
+        if (position.x + Resource.shieldSprite.get(0).getWidth() < 0)
         {
             position.x = screen.right;
             position.y = (int) (Math.random() * screen.bottom) + screen.top;
         }
 
-        updatePosition(position, Resource.bonusSpeedSprite.get(0));
+        updatePosition(position, Resource.shieldSprite.get(0));
         bonusSpeedAnim.runAnimation();
     }
 
