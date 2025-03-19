@@ -19,11 +19,17 @@ import java.util.Locale;
 public class Player extends ObjectFW implements IDrawable
 {
     private AnimationFW playerSprite;
-    private AnimationFW playerSpriteUp;
-    private AnimationFW playerSpriteDamage;
-    private AnimationFW playerSpriteUpDamage;
-    private AnimationFW playerSpriteDestruction;
+    private AnimationFW playerSpriteJump;
+    private AnimationFW playerSpriteRun;
     private AnimationFW playerSpriteShield;
+    private AnimationFW playerSpriteJumpShield;
+    private AnimationFW playerSpriteRunShield;
+
+    //private AnimationFW playerSpriteDamage;
+    //private AnimationFW playerSpriteUpDamage;
+    //private AnimationFW playerSpriteDestruction;
+
+
     private CoreFW coreFW;
 
     private int passedDistance;
@@ -62,11 +68,15 @@ public class Player extends ObjectFW implements IDrawable
         this.screen.bottom = maxScreen.y - Resource.playerSprite.get(0).getHeight();
         this.screen.top = height;
         this.playerSprite = new AnimationFW(Resource.playerSprite);
-        this.playerSpriteUp = new AnimationFW(Resource.playerSpriteUp);
-        this.playerSpriteUpDamage = new AnimationFW(Resource.playerSpriteUpDamage);
-        this.playerSpriteDamage = new AnimationFW(Resource.playerSpriteDamage);
-        this.playerSpriteDestruction = new AnimationFW(Resource.playerSpriteDestruction);
+        this.playerSpriteJump = new AnimationFW(Resource.playerSpriteJump);
+        this.playerSpriteRun = new AnimationFW(Resource.playerSpriteRun);
         this.playerSpriteShield = new AnimationFW(Resource.playerSpriteShield);
+        this.playerSpriteJumpShield = new AnimationFW(Resource.playerSpriteJumpShield);
+        this.playerSpriteRunShield = new AnimationFW(Resource.playerSpriteRunShield);
+
+        //this.playerSpriteUpDamage = new AnimationFW(Resource.playerSpriteUpDamage);
+        //this.playerSpriteDamage = new AnimationFW(Resource.playerSpriteDamage);
+        //this.playerSpriteDestruction = new AnimationFW(Resource.playerSpriteDestruction);
     }
 
     @Override
@@ -160,38 +170,51 @@ public class Player extends ObjectFW implements IDrawable
 
         updatePosition(position, Resource.playerSprite.get(0));
 
-        if (shieldDelay.isElapsed(2))
+        if (shieldDelay.isElapsed(5))
             hitShield = false;
 
         if (damageDelay.isElapsed(1))
             hitAsteroid = false;
 
-       if (hitAsteroid)
+       /*if (hitAsteroid)
        {
            if (running)
                playerSpriteUpDamage.runAnimation();
            else
                playerSpriteDamage.runAnimation();
        }
-
-       else
-       {
-           if (running)
-               playerSpriteUp.runAnimation();
-           else
-               playerSprite.runAnimation();
-       }
+        */
 
         if (hitShield)
         {
             if (running)
-                playerSpriteShield.runAnimation();
+                if (jumping || falling)
+                    playerSpriteJumpShield.runAnimation();
+                else
+                    playerSpriteRunShield.runAnimation();
+            else if (jumping || falling)
+                playerSpriteJumpShield.runAnimation();
             else
                 playerSpriteShield.runAnimation();
         }
 
-        if (isGameOver)
-            playerSpriteDestruction.runAnimation();
+       else
+       {
+           if (running)
+               if (jumping || falling)
+                   playerSpriteJump.runAnimation();
+               else
+                   playerSpriteRun.runAnimation();
+           else if (jumping || falling)
+               playerSpriteJump.runAnimation();
+           else
+               playerSprite.runAnimation();
+       }
+
+
+
+    //    if (isGameOver)
+    //        playerSpriteDestruction.runAnimation();
     }
 
     @Override
@@ -200,33 +223,41 @@ public class Player extends ObjectFW implements IDrawable
         if (hitShield)
         {
             if (running)
-                playerSpriteShield.drawingAnimation(graphicsFW, position);
-
+                if (jumping || falling)
+                    playerSpriteJumpShield.drawingAnimation(graphicsFW, position);
+                else
+                    playerSpriteRunShield.drawingAnimation(graphicsFW, position);
+            else if (jumping || falling)
+                playerSpriteJumpShield.drawingAnimation(graphicsFW, position);
             else
                 playerSpriteShield.drawingAnimation(graphicsFW, position);
-            return;
         }
-
-        if (hitAsteroid)
+        else
+        {
+            if (running)
+                if (jumping || falling)
+                    playerSpriteJump.drawingAnimation(graphicsFW, position);
+                else
+                    playerSpriteRun.drawingAnimation(graphicsFW, position);
+            else if (jumping || falling)
+                    playerSpriteJump.drawingAnimation(graphicsFW, position);
+            else
+                playerSprite.drawingAnimation(graphicsFW, position);
+        }
+        /*if (hitAsteroid)
         {
             if (running)
                 playerSpriteUpDamage.drawingAnimation(graphicsFW, position);
             else
                 playerSpriteDamage.drawingAnimation(graphicsFW, position);
         }
+         */
 
-        else
-        {
-            if (running)
-                playerSpriteUp.drawingAnimation(graphicsFW, position);
-            else
-                playerSprite.drawingAnimation(graphicsFW, position);
-        }
 
-        if (isGameOver)
-        {
-            playerSpriteDestruction.drawingAnimation(graphicsFW, position);
-        }
+        //if (isGameOver)
+        //{
+        //playerSpriteDestruction.drawingAnimation(graphicsFW, position);
+        //}
     }
 
     public void hitObject()
